@@ -13,7 +13,6 @@ namespace WinForm {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	std::ofstream base_out;
-	
 	struct house
 	{
 		int region;
@@ -26,7 +25,7 @@ namespace WinForm {
 		int hospital;
 		int shop;
 		int intercom;
-		int region2;
+		int centr, kurch, lenin, chtz, sovet, met, kall;
 		int room2;
 		int squareMin2;
 		int squareMax2;
@@ -42,7 +41,8 @@ namespace WinForm {
 		os << myList.region << " " << myList.room << " " << myList.squareMin
 			<< " " << myList.school << " " << myList.pharmacy << " " << myList.Kindergarten
 			<< " " << myList.atm << " " << myList.hospital << " " << myList.shop << " " << myList.intercom
-			<< " " << myList.region2 << " " << myList.room2 << " " << myList.squareMin2 << " " << myList.school2
+			<< " " << myList.met << " " << myList.kurch << " " << myList.kall << " " << myList.chtz << " " << myList.centr
+			<< " " << myList.sovet << " " << myList.lenin << " " << myList.room2 << " " << myList.squareMin2 << " " << myList.school2
 			<< " " << myList.pharmacy2 << " " << myList.Kindergarten2 << " " << myList.atm2 << " " << myList.hospital2
 			<< " " << myList.shop2 << " " << myList.intercom2 << " " << myList.squareMax2 << std::endl;
 		return os;
@@ -51,10 +51,51 @@ namespace WinForm {
 	house client, buff;
 	bool badV(house &tmp, house &cl)
 	{
-		return ((tmp.region == cl.region2) & (tmp.room == cl.room2) &(tmp.squareMin <= cl.squareMax2)&
+		int flagtime = 0;
+		switch (tmp.region)
+		{
+		case 0: 
+			if (tmp.met) 
+			{
+				flagtime = 1;
+			}
+		case 1:
+			if (tmp.kurch)
+			{
+				flagtime = 1;
+			}
+		case 2:
+			if (tmp.kall)
+			{
+				flagtime = 1;
+			}
+		case 3:
+			if (tmp.chtz)
+			{
+				flagtime = 1;
+			}
+		case 4:
+			if (tmp.centr)
+			{
+				flagtime = 1;
+			}
+		case 5:
+			if (tmp.sovet)
+			{
+				flagtime = 1;
+			}
+		case 6:
+			if (tmp.lenin)
+			{
+				flagtime = 1;
+			}
+		default:
+			break;
+		}
+		return ((flagtime) & (tmp.room == cl.room2) &(tmp.squareMin <= cl.squareMax2)&
 			(tmp.squareMin >= cl.squareMin2) & (tmp.pharmacy == cl.pharmacy2) & (tmp.school == cl.school2)
 			&  (tmp.Kindergarten == cl.Kindergarten2) & (tmp.atm == cl.atm2) & (tmp.hospital == cl.hospital2)
-			& (tmp.shop == cl.shop2) & (tmp.intercom == cl.intercom2)& (tmp.region2 == cl.region)
+			& (tmp.shop == cl.shop2) & (tmp.intercom == cl.intercom2)
 			& (tmp.room2 == cl.room) & (tmp.squareMin2 <= cl.squareMin) &(tmp.squareMax2 >= cl.squareMin)
 			& (tmp.pharmacy2 == cl.pharmacy) & (tmp.school2 == cl.school) &  (tmp.Kindergarten2 == cl.Kindergarten)
 			& (tmp.atm2 == cl.atm) & (tmp.hospital2 == cl.hospital) & (tmp.shop2 == cl.shop)
@@ -94,7 +135,8 @@ namespace WinForm {
 			{
 				base >> buff.region >> buff.room >> buff.squareMin >> buff.school >> buff.pharmacy 
 					>> buff.Kindergarten >> buff.atm >> buff.hospital >> buff.shop >> buff.intercom  
-					>> buff.region2 >> buff.room2 >> buff.squareMin2 >> buff.school2 >> buff.pharmacy2 
+					>> buff.met >> buff.kurch >> buff.kall >> buff.chtz >> buff.centr
+					>> buff.sovet >> buff.lenin >> buff.room2 >> buff.squareMin2 >> buff.school2 >> buff.pharmacy2
 					>> buff.Kindergarten2 >> buff.atm2 >> buff.hospital2 >> buff.shop2 >> buff.intercom2 >> buff.squareMax2;
 				myList.push_front(buff);
 			}
@@ -142,13 +184,14 @@ namespace WinForm {
 
 	private: System::Windows::Forms::NumericUpDown^  numericUpDown3;
 	private: System::Windows::Forms::NumericUpDown^  numericUpDown4;
-	private: System::Windows::Forms::ComboBox^  comboBox2;
+
 
 	private: System::Windows::Forms::Label^  label10;
 	private: System::Windows::Forms::NumericUpDown^  numericUpDown5;
 
 
 	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::CheckedListBox^  checkedListBox1;
 	private: System::ComponentModel::IContainer^  components;
 
 	protected:
@@ -186,8 +229,8 @@ namespace WinForm {
 			this->etc2 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->numericUpDown3 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->numericUpDown4 = (gcnew System::Windows::Forms::NumericUpDown());
-			this->comboBox2 = (gcnew System::Windows::Forms::ComboBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
@@ -209,7 +252,7 @@ namespace WinForm {
 			this->groupBox1->Controls->Add(this->comboBox1);
 			this->groupBox1->Location = System::Drawing::Point(12, 35);
 			this->groupBox1->Name = L"groupBox1";
-			this->groupBox1->Size = System::Drawing::Size(408, 240);
+			this->groupBox1->Size = System::Drawing::Size(408, 319);
 			this->groupBox1->TabIndex = 10;
 			this->groupBox1->TabStop = false;
 			this->groupBox1->Text = L"Ваша квартира";
@@ -290,7 +333,7 @@ namespace WinForm {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(384, 333);
+			this->button1->Location = System::Drawing::Point(454, 387);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 12;
@@ -300,6 +343,7 @@ namespace WinForm {
 			// 
 			// groupBox2
 			// 
+			this->groupBox2->Controls->Add(this->checkedListBox1);
 			this->groupBox2->Controls->Add(this->label10);
 			this->groupBox2->Controls->Add(this->numericUpDown5);
 			this->groupBox2->Controls->Add(this->label5);
@@ -309,10 +353,9 @@ namespace WinForm {
 			this->groupBox2->Controls->Add(this->etc2);
 			this->groupBox2->Controls->Add(this->numericUpDown3);
 			this->groupBox2->Controls->Add(this->numericUpDown4);
-			this->groupBox2->Controls->Add(this->comboBox2);
 			this->groupBox2->Location = System::Drawing::Point(426, 35);
 			this->groupBox2->Name = L"groupBox2";
-			this->groupBox2->Size = System::Drawing::Size(408, 240);
+			this->groupBox2->Size = System::Drawing::Size(408, 319);
 			this->groupBox2->TabIndex = 13;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Укажите квартиру,которую Вы хотите";
@@ -336,7 +379,7 @@ namespace WinForm {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(13, 91);
+			this->label5->Location = System::Drawing::Point(11, 188);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(88, 13);
 			this->label5->TabIndex = 13;
@@ -376,7 +419,7 @@ namespace WinForm {
 				L"Школа", L"Аптека", L"Детский сад", L"Банкомат", L"Больница",
 					L"Продуктовый магазин", L"Домофон"
 			});
-			this->etc2->Location = System::Drawing::Point(14, 110);
+			this->etc2->Location = System::Drawing::Point(14, 204);
 			this->etc2->Name = L"etc2";
 			this->etc2->Size = System::Drawing::Size(157, 109);
 			this->etc2->TabIndex = 9;
@@ -395,21 +438,9 @@ namespace WinForm {
 			this->numericUpDown4->Size = System::Drawing::Size(80, 20);
 			this->numericUpDown4->TabIndex = 7;
 			// 
-			// comboBox2
-			// 
-			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Items->AddRange(gcnew cli::array< System::Object^  >(7) {
-				L"Металлургический", L"Курчатовский", L"Калининский",
-					L"Тракторозаводский", L"Центральный", L"Советский", L"Ленинский"
-			});
-			this->comboBox2->Location = System::Drawing::Point(13, 46);
-			this->comboBox2->Name = L"comboBox2";
-			this->comboBox2->Size = System::Drawing::Size(121, 21);
-			this->comboBox2->TabIndex = 6;
-			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(384, 291);
+			this->button2->Location = System::Drawing::Point(325, 387);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 14;
@@ -417,11 +448,23 @@ namespace WinForm {
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
+			// checkedListBox1
+			// 
+			this->checkedListBox1->FormattingEnabled = true;
+			this->checkedListBox1->Items->AddRange(gcnew cli::array< System::Object^  >(7) {
+				L"Металлургический", L"Курчатовский", L"Калининский",
+					L"Тракторозаводский", L"Центральный", L"Советский", L"Ленинский"
+			});
+			this->checkedListBox1->Location = System::Drawing::Point(14, 46);
+			this->checkedListBox1->Name = L"checkedListBox1";
+			this->checkedListBox1->Size = System::Drawing::Size(138, 109);
+			this->checkedListBox1->TabIndex = 16;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(845, 368);
+			this->ClientSize = System::Drawing::Size(845, 422);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->button1);
@@ -467,7 +510,27 @@ namespace WinForm {
 			client.intercom = 1;
 		else client.intercom = 0;
 		client.room2 = System::Convert::ToInt32(numericUpDown4->Text);
-		client.region2 = System::Convert::ToInt32(comboBox2->SelectedIndex);
+		if (checkedListBox1->GetItemChecked(0))
+			client.met = 1;
+		else client.met = 0;
+		if (checkedListBox1->GetItemChecked(1))
+			client.kurch = 1;
+		else client.kurch = 0;
+		if (checkedListBox1->GetItemChecked(2))
+			client.kall = 1;
+		else client.kall = 0;
+		if (checkedListBox1->GetItemChecked(3))
+			client.chtz = 1;
+		else client.chtz = 0;
+		if (checkedListBox1->GetItemChecked(4))
+			client.centr = 1;
+		else client.centr = 0;
+		if (checkedListBox1->GetItemChecked(5))
+			client.sovet = 1;
+		else client.sovet = 0;
+		if (checkedListBox1->GetItemChecked(6))
+			client.lenin = 1;
+		else client.lenin = 0;
 		client.squareMin2 = System::Convert::ToInt32(numericUpDown3->Text);
 		client.squareMax2 = System::Convert::ToInt32(numericUpDown5->Text);
 		if (etc2->GetItemChecked(0))
@@ -499,7 +562,8 @@ namespace WinForm {
 			base_out << client.region << " " << client.room << " " << client.squareMin
 				<< " " << client.school << " " << client.pharmacy << " " << client.Kindergarten
 				<< " " << client.atm << " " << client.hospital << " " << client.shop << " " << client.intercom
-				<< " " << client.region2 << " " << client.room2 << " " << client.squareMin2 << " " << client.school2
+				<< " " << client.met << " " << client.kurch << " " << client.kall << " " << client.chtz << " " << client.centr
+				<< " " << client.sovet << " " << client.lenin << " " << client.room2 << " " << client.squareMin2 << " " << client.school2
 				<< " " << client.pharmacy2 << " " << client.Kindergarten2 << " " << client.atm2 << " " << client.hospital2
 				<< " " << client.shop2 << " " << client.intercom2 << " " << client.squareMax2 << std::endl;
 			base_out.close();
@@ -544,7 +608,27 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		client.intercom = 1;
 	else client.intercom = 0;
 	client.room2 = System::Convert::ToInt32(numericUpDown4->Text);
-	client.region2 = System::Convert::ToInt32(comboBox2->SelectedIndex);
+	if (checkedListBox1->GetItemChecked(0))
+		client.met = 1;
+	else client.met = 0;
+	if (checkedListBox1->GetItemChecked(1))
+		client.kurch = 1;
+	else client.kurch = 0;
+	if (checkedListBox1->GetItemChecked(2))
+		client.kall = 1;
+	else client.kall = 0;
+	if (checkedListBox1->GetItemChecked(3))
+		client.chtz = 1;
+	else client.chtz = 0;
+	if (checkedListBox1->GetItemChecked(4))
+		client.centr = 1;
+	else client.centr = 0;
+	if (checkedListBox1->GetItemChecked(5))
+		client.sovet = 1;
+	else client.sovet = 0;
+	if (checkedListBox1->GetItemChecked(6))
+		client.lenin = 1;
+	else client.lenin = 0;
 	client.squareMin2 = System::Convert::ToInt32(numericUpDown3->Text);
 	client.squareMax2 = System::Convert::ToInt32(numericUpDown5->Text);
 	if (etc2->GetItemChecked(0))
@@ -572,7 +656,9 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 	base_out << client.region << " " << client.room << " " << client.squareMin
 		<< " " << client.school << " " << client.pharmacy << " " << client.Kindergarten
 		<< " " << client.atm << " " << client.hospital << " " << client.shop << " " << client.intercom
-		<< " " << client.region2 << " " << client.room2 << " " << client.squareMin2 << " " << client.school2
+		<< " " << client.met << " " << client.kurch << " " << client.kall << " " << client.chtz << " " << client.centr
+		<< " " << client.sovet << " " << client.lenin << " " << client.room2 << " " << client.squareMin2 
+		<< " " << client.school2
 		<< " " << client.pharmacy2 << " " << client.Kindergarten2 << " " << client.atm2 << " " << client.hospital2
 		<< " " << client.shop2 << " " << client.intercom2 << " " << client.squareMax2 << std::endl;
 	base_out.close();
