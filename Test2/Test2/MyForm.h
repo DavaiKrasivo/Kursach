@@ -346,7 +346,7 @@ namespace WinForm {
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 12;
-			this->button1->Text = L"Обмен";
+			this->button1->Text = L"Найти";
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &MyForm::button1_Click);
 			// 
@@ -468,7 +468,7 @@ namespace WinForm {
 			this->groupBox3->Size = System::Drawing::Size(744, 171);
 			this->groupBox3->TabIndex = 17;
 			this->groupBox3->TabStop = false;
-			this->groupBox3->Text = L"groupBox3";
+			this->groupBox3->Text = L"Найденые варианты";
 			// 
 			// button3
 			// 
@@ -477,7 +477,7 @@ namespace WinForm {
 			this->button3->Name = L"button3";
 			this->button3->Size = System::Drawing::Size(75, 23);
 			this->button3->TabIndex = 18;
-			this->button3->Text = L"button3";
+			this->button3->Text = L"Обмен";
 			this->button3->UseVisualStyleBackColor = true;
 			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
 			// 
@@ -495,7 +495,7 @@ namespace WinForm {
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 14;
-			this->button2->Text = L"button2";
+			this->button2->Text = L"Добавить";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
