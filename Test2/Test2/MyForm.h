@@ -13,7 +13,8 @@ namespace WinForm {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	std::ofstream base_out;
-	std::string str;
+	std::list<struct house>::iterator it2[10];
+	std::list<struct house>::iterator it;
 	struct house
 	{
 		int region;
@@ -195,6 +196,7 @@ namespace WinForm {
 	private: System::Windows::Forms::CheckedListBox^  checkedListBox1;
 	private: System::Windows::Forms::GroupBox^  groupBox3;
 	private: System::Windows::Forms::ListBox^  listBox1;
+	private: System::Windows::Forms::Button^  button3;
 	private: System::ComponentModel::IContainer^  components;
 
 	protected:
@@ -223,8 +225,6 @@ namespace WinForm {
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
-			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
-			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->numericUpDown5 = (gcnew System::Windows::Forms::NumericUpDown());
@@ -235,15 +235,18 @@ namespace WinForm {
 			this->etc2 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->numericUpDown3 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->numericUpDown4 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			this->groupBox2->SuspendLayout();
-			this->groupBox3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown4))->BeginInit();
+			this->groupBox3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// groupBox1
@@ -339,7 +342,7 @@ namespace WinForm {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(473, 360);
+			this->button1->Location = System::Drawing::Point(426, 360);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 12;
@@ -365,24 +368,6 @@ namespace WinForm {
 			this->groupBox2->TabIndex = 13;
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Укажите квартиру,которую Вы хотите";
-			// 
-			// groupBox3
-			// 
-			this->groupBox3->Controls->Add(this->listBox1);
-			this->groupBox3->Location = System::Drawing::Point(57, 408);
-			this->groupBox3->Name = L"groupBox3";
-			this->groupBox3->Size = System::Drawing::Size(744, 171);
-			this->groupBox3->TabIndex = 17;
-			this->groupBox3->TabStop = false;
-			this->groupBox3->Text = L"groupBox3";
-			// 
-			// listBox1
-			// 
-			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(6, 19);
-			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(738, 134);
-			this->listBox1->TabIndex = 0;
 			// 
 			// checkedListBox1
 			// 
@@ -474,9 +459,39 @@ namespace WinForm {
 			this->numericUpDown4->Size = System::Drawing::Size(80, 20);
 			this->numericUpDown4->TabIndex = 7;
 			// 
+			// groupBox3
+			// 
+			this->groupBox3->Controls->Add(this->button3);
+			this->groupBox3->Controls->Add(this->listBox1);
+			this->groupBox3->Location = System::Drawing::Point(57, 408);
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->Size = System::Drawing::Size(744, 171);
+			this->groupBox3->TabIndex = 17;
+			this->groupBox3->TabStop = false;
+			this->groupBox3->Text = L"groupBox3";
+			// 
+			// button3
+			// 
+			this->button3->Enabled = false;
+			this->button3->Location = System::Drawing::Point(663, 142);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(75, 23);
+			this->button3->TabIndex = 18;
+			this->button3->Text = L"button3";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MyForm::button3_Click);
+			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(6, 19);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(651, 134);
+			this->listBox1->TabIndex = 0;
+			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(289, 360);
+			this->button2->Location = System::Drawing::Point(345, 360);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 14;
@@ -502,15 +517,16 @@ namespace WinForm {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
-			this->groupBox3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown4))->EndInit();
+			this->groupBox3->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+		button3->Enabled = true;
 		client.room = System::Convert::ToInt32(numericUpDown1->Text);
 		client.region = System::Convert::ToInt32(comboBox1->SelectedIndex);
 		client.squareMin = System::Convert::ToInt32(numericUpDown2->Text);
@@ -581,31 +597,25 @@ namespace WinForm {
 			client.intercom2 = 1;
 		else client.intercom2 = 0;
 		
-		std::list<struct house>::iterator it = myList.begin();
+		it = myList.begin();
+		int i = 0;
 		for (it; it != myList.end(); it++) {
 			if(badV(*it, client)) {
 				switch (it->region)
 				{
-				case 0: listBox1->Items->Add("Металлургический, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
-				case 1: listBox1->Items->Add("Курчатовский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
-				case 2: listBox1->Items->Add("Калининский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
-				case 3: listBox1->Items->Add("Тракторозоводский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
-				case 4: listBox1->Items->Add("Центральный, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
-				case 5: listBox1->Items->Add("Советский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
-				case 6: listBox1->Items->Add("Ленинский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				case 0: listBox1->Items->Add("Металлургический, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); it2[i] = it; i++; break;
+				case 1: listBox1->Items->Add("Курчатовский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); it2[i] = it; i++; break;
+				case 2: listBox1->Items->Add("Калининский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); it2[i] = it; i++; break;
+				case 3: listBox1->Items->Add("Тракторозоводский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); it2[i] = it; i++; break;
+				case 4: listBox1->Items->Add("Центральный, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); it2[i] = it; i++; break;
+				case 5: listBox1->Items->Add("Советский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); it2[i] = it; i++; break;
+				case 6: listBox1->Items->Add("Ленинский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); it2[i] = it; i++; break;
 				default:
 					break;
 				}
 			}
 	}
-		base_out.open("base.txt");
-		it = myList.begin();
-		base_out << *it;
-		std::advance(it, 3);
-		for (it;it!=myList.end();it++) {
-			base_out << *it;
-		}
-		base_out.close();
+		
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	client.room = System::Convert::ToInt32(numericUpDown1->Text);
@@ -678,15 +688,40 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 		client.intercom2 = 1;
 	else client.intercom2 = 0;
 	base_out.open("base.txt", std::ios::app);
-	base_out << client.region << " " << client.room << " " << client.squareMin
-		<< " " << client.school << " " << client.pharmacy << " " << client.Kindergarten
-		<< " " << client.atm << " " << client.hospital << " " << client.shop << " " << client.intercom
-		<< " " << client.met << " " << client.kurch << " " << client.kall << " " << client.chtz << " " << client.centr
-		<< " " << client.sovet << " " << client.lenin << " " << client.room2 << " " << client.squareMin2 
-		<< " " << client.school2
-		<< " " << client.pharmacy2 << " " << client.Kindergarten2 << " " << client.atm2 << " " << client.hospital2
-		<< " " << client.shop2 << " " << client.intercom2 << " " << client.squareMax2 << std::endl;
+	base_out << client.region << " " << client.room << " " << client.squareMin<< " " << client.school << " " 
+		<< client.pharmacy << " " << client.Kindergarten << " " << client.atm << " " << client.hospital << " "
+		<< client.shop << " " << client.intercom << " " << client.met << " " << client.kurch << " "
+		<< client.kall << " " << client.chtz << " " << client.centr << " " << client.sovet
+		<< " " << client.lenin << " " << client.room2 << " " << client.squareMin2 
+		<< " " << client.school2 << " " << client.pharmacy2 << " " << client.Kindergarten2 << " " 
+		<< client.atm2 << " " << client.hospital2 << " " << client.shop2 << " " << client.intercom2 << " " 
+		<< client.squareMax2 << std::endl;
 	base_out.close();
+}
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	button1->Enabled = true;
+	button3->Enabled = false;
+	MessageBox::Show("обмен состоялся","удача");
+	del(myList, *it2[listBox1->SelectedIndex]);
+	base_out.open("Archive.txt", std::ios::app);
+	base_out << client.region << " " << client.room << " " << client.squareMin << " " << client.school << " "
+		<< client.pharmacy << " " << client.Kindergarten << " " << client.atm << " " << client.hospital << " "
+		<< client.shop << " " << client.intercom << " " << client.met << " " << client.kurch << " "
+		<< client.kall << " " << client.chtz << " " << client.centr << " " << client.sovet
+		<< " " << client.lenin << " " << client.room2 << " " << client.squareMin2
+		<< " " << client.school2 << " " << client.pharmacy2 << " " << client.Kindergarten2 << " "
+		<< client.atm2 << " " << client.hospital2 << " " << client.shop2 << " " << client.intercom2 << " "
+		<< client.squareMax2 << std::endl;
+	base_out.close();
+	base_out.open("base.txt");
+	it = myList.begin();
+	base_out << *it;
+	std::advance(it, 3);
+	for (it; it != myList.end(); it++) {
+		base_out << *it;
+	}
+	base_out.close();
+	listBox1->Items->Clear();
 }
 };
 }
