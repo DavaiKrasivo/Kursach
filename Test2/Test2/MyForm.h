@@ -13,6 +13,7 @@ namespace WinForm {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	std::ofstream base_out;
+	std::string str;
 	struct house
 	{
 		int region;
@@ -192,6 +193,8 @@ namespace WinForm {
 
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::CheckedListBox^  checkedListBox1;
+	private: System::Windows::Forms::GroupBox^  groupBox3;
+	private: System::Windows::Forms::ListBox^  listBox1;
 	private: System::ComponentModel::IContainer^  components;
 
 	protected:
@@ -220,6 +223,9 @@ namespace WinForm {
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->groupBox2 = (gcnew System::Windows::Forms::GroupBox());
+			this->groupBox3 = (gcnew System::Windows::Forms::GroupBox());
+			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->label10 = (gcnew System::Windows::Forms::Label());
 			this->numericUpDown5 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->label5 = (gcnew System::Windows::Forms::Label());
@@ -230,11 +236,11 @@ namespace WinForm {
 			this->numericUpDown3 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->numericUpDown4 = (gcnew System::Windows::Forms::NumericUpDown());
 			this->button2 = (gcnew System::Windows::Forms::Button());
-			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->groupBox1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown2))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
 			this->groupBox2->SuspendLayout();
+			this->groupBox3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown4))->BeginInit();
@@ -333,7 +339,7 @@ namespace WinForm {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(454, 387);
+			this->button1->Location = System::Drawing::Point(473, 360);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 12;
@@ -360,6 +366,36 @@ namespace WinForm {
 			this->groupBox2->TabStop = false;
 			this->groupBox2->Text = L"Укажите квартиру,которую Вы хотите";
 			// 
+			// groupBox3
+			// 
+			this->groupBox3->Controls->Add(this->listBox1);
+			this->groupBox3->Location = System::Drawing::Point(57, 408);
+			this->groupBox3->Name = L"groupBox3";
+			this->groupBox3->Size = System::Drawing::Size(744, 171);
+			this->groupBox3->TabIndex = 17;
+			this->groupBox3->TabStop = false;
+			this->groupBox3->Text = L"groupBox3";
+			// 
+			// listBox1
+			// 
+			this->listBox1->FormattingEnabled = true;
+			this->listBox1->Location = System::Drawing::Point(6, 19);
+			this->listBox1->Name = L"listBox1";
+			this->listBox1->Size = System::Drawing::Size(738, 134);
+			this->listBox1->TabIndex = 0;
+			// 
+			// checkedListBox1
+			// 
+			this->checkedListBox1->FormattingEnabled = true;
+			this->checkedListBox1->Items->AddRange(gcnew cli::array< System::Object^  >(7) {
+				L"Металлургический", L"Курчатовский", L"Калининский",
+					L"Тракторозаводский", L"Центральный", L"Советский", L"Ленинский"
+			});
+			this->checkedListBox1->Location = System::Drawing::Point(14, 46);
+			this->checkedListBox1->Name = L"checkedListBox1";
+			this->checkedListBox1->Size = System::Drawing::Size(138, 109);
+			this->checkedListBox1->TabIndex = 16;
+			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
@@ -379,7 +415,7 @@ namespace WinForm {
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(11, 188);
+			this->label5->Location = System::Drawing::Point(11, 179);
 			this->label5->Name = L"label5";
 			this->label5->Size = System::Drawing::Size(88, 13);
 			this->label5->TabIndex = 13;
@@ -419,7 +455,7 @@ namespace WinForm {
 				L"Школа", L"Аптека", L"Детский сад", L"Банкомат", L"Больница",
 					L"Продуктовый магазин", L"Домофон"
 			});
-			this->etc2->Location = System::Drawing::Point(14, 204);
+			this->etc2->Location = System::Drawing::Point(14, 195);
 			this->etc2->Name = L"etc2";
 			this->etc2->Size = System::Drawing::Size(157, 109);
 			this->etc2->TabIndex = 9;
@@ -440,7 +476,7 @@ namespace WinForm {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(325, 387);
+			this->button2->Location = System::Drawing::Point(289, 360);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 14;
@@ -448,26 +484,15 @@ namespace WinForm {
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MyForm::button2_Click);
 			// 
-			// checkedListBox1
-			// 
-			this->checkedListBox1->FormattingEnabled = true;
-			this->checkedListBox1->Items->AddRange(gcnew cli::array< System::Object^  >(7) {
-				L"Металлургический", L"Курчатовский", L"Калининский",
-					L"Тракторозаводский", L"Центральный", L"Советский", L"Ленинский"
-			});
-			this->checkedListBox1->Location = System::Drawing::Point(14, 46);
-			this->checkedListBox1->Name = L"checkedListBox1";
-			this->checkedListBox1->Size = System::Drawing::Size(138, 109);
-			this->checkedListBox1->TabIndex = 16;
-			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(845, 422);
+			this->ClientSize = System::Drawing::Size(845, 591);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->groupBox2);
 			this->Controls->Add(this->button1);
+			this->Controls->Add(this->groupBox3);
 			this->Controls->Add(this->groupBox1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
@@ -477,6 +502,7 @@ namespace WinForm {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
 			this->groupBox2->ResumeLayout(false);
 			this->groupBox2->PerformLayout();
+			this->groupBox3->ResumeLayout(false);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown5))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown3))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown4))->EndInit();
@@ -555,26 +581,25 @@ namespace WinForm {
 			client.intercom2 = 1;
 		else client.intercom2 = 0;
 		
-		if (find(myList,client))
-		{
-			del(myList, client);
-			base_out.open("Archive.txt",std::ios::app);
-			base_out << client.region << " " << client.room << " " << client.squareMin
-				<< " " << client.school << " " << client.pharmacy << " " << client.Kindergarten
-				<< " " << client.atm << " " << client.hospital << " " << client.shop << " " << client.intercom
-				<< " " << client.met << " " << client.kurch << " " << client.kall << " " << client.chtz << " " << client.centr
-				<< " " << client.sovet << " " << client.lenin << " " << client.room2 << " " << client.squareMin2 << " " << client.school2
-				<< " " << client.pharmacy2 << " " << client.Kindergarten2 << " " << client.atm2 << " " << client.hospital2
-				<< " " << client.shop2 << " " << client.intercom2 << " " << client.squareMax2 << std::endl;
-			base_out.close();
-			MessageBox::Show("Обмен состоялся", "Результат");
-		}
-		else
-		{
-			MessageBox::Show("Извините, но по Вашему запросу ничего не найдено ", "Результат");
-		}
+		std::list<struct house>::iterator it = myList.begin();
+		for (it; it != myList.end(); it++) {
+			if(badV(*it, client)) {
+				switch (it->region)
+				{
+				case 0: listBox1->Items->Add("Металлургический, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				case 1: listBox1->Items->Add("Курчатовский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				case 2: listBox1->Items->Add("Калининский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				case 3: listBox1->Items->Add("Тракторозоводский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				case 4: listBox1->Items->Add("Центральный, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				case 5: listBox1->Items->Add("Советский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				case 6: listBox1->Items->Add("Ленинский, Колво комнат:" + it->room + ", Площадь:" + it->squareMin); break;
+				default:
+					break;
+				}
+			}
+	}
 		base_out.open("base.txt");
-		std::list<struct house>::const_iterator it = myList.begin();
+		it = myList.begin();
 		base_out << *it;
 		std::advance(it, 3);
 		for (it;it!=myList.end();it++) {
